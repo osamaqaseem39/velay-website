@@ -1,0 +1,371 @@
+:root {
+  --font-default: "MXSQUAD", Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI,
+    Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+@font-face {
+  font-family: "MXSQUAD";
+  src: url("/MXSQUADDemo.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --overlay: rgba(0, 0, 0, 0.18);
+  --text: rgba(255, 255, 255, 0.95);
+  --muted: rgba(255, 255, 255, 0.72);
+  --glass: rgba(10, 10, 14, 0.62);
+  --glass-border: rgba(255, 255, 255, 0.10);
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+  --accent: #520d44;
+  --accent2: #8a4dff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: var(--font-default);
+  background: #0b0b0f;
+}
+
+body {
+  overflow: hidden;
+}
+
+.app {
+  height: 100vh;
+  height: 100dvh; /* mobile address bar friendly */
+  width: 100vw;
+  position: relative;
+}
+
+.map {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.mapOverlay {
+  position: absolute;
+  inset: 0;
+  background: var(--overlay);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.neonGrid {
+  background:
+    radial-gradient(1000px 520px at 50% 50%, rgba(255, 47, 214, 0.10), transparent 60%),
+    radial-gradient(900px 520px at 60% 40%, rgba(138, 77, 255, 0.10), transparent 62%),
+    linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.05));
+  opacity: 0.9;
+}
+
+.center {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  padding: clamp(14px, 3vw, 28px);
+  pointer-events: none; /* keep map interactive */
+}
+
+.headline {
+  margin: 0;
+  text-align: center;
+  color: var(--text);
+  font-family: "MXSQUAD", Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI,
+    Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55),
+    0 0 22px rgba(255, 47, 214, 0.18);
+  max-width: min(980px, 92vw);
+  font-size: clamp(18px, 4.5vw, 56px);
+  opacity: 1;
+}
+
+.neonPrefix {
+  display: inline-block;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.98); /* white inside */
+  padding: 0.1em 0.32em;
+  border-radius: 0.32em;
+  border: none;
+  box-shadow:
+    0 0 0 rgba(0, 0, 0, 0);
+  text-shadow:
+    0 0 10px rgba(255, 47, 214, 0.35),
+    0 0 22px rgba(255, 47, 214, 0.22);
+  -webkit-text-stroke: 1.2px rgba(195, 0, 143, 0.95); /* neon pink outline */
+}
+
+.headlineRest {
+  margin-left: 0;
+}
+
+.typing {
+  display: inline-block;
+  position: relative;
+  padding-right: 10px;
+  animation: textIn 500ms ease-out 120ms both;
+}
+
+.typing::after {
+  content: "";
+  position: absolute;
+  right: 2px;
+  top: 0.12em;
+  bottom: 0.12em;
+  width: 2px;
+  background: rgba(255, 47, 214, 0.95);
+  border-radius: 2px;
+  animation: caretBlink 850ms ease-in-out infinite;
+}
+
+.typingDone::after {
+  opacity: 0;
+  animation: none;
+}
+
+@keyframes textIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes caretBlink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  46%,
+  100% {
+    opacity: 0;
+  }
+}
+
+footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  padding: max(10px, env(safe-area-inset-bottom)) 18px;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.footerInner {
+  width: min(1100px, 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px 14px;
+  background: var(--glass);
+  border: 1px solid rgba(255, 47, 214, 0.18);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  pointer-events: auto;
+}
+
+.brand {
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  width: 100%;
+  text-align: center;
+  white-space: normal;
+  overflow: visible;
+}
+
+.attribution {
+  margin-top: 2px;
+  font-size: 11px;
+  letter-spacing: 0.01em;
+  opacity: 0.75;
+}
+
+.attributionSummary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.attributionSummary::-webkit-details-marker {
+  display: none;
+}
+
+.attributionSummary::before {
+  content: "ⓘ";
+  color: rgba(255, 47, 214, 0.9);
+}
+
+.attributionBody {
+  display: inline;
+  margin-left: 8px;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.attribution a {
+  color: rgba(255, 47, 214, 0.92);
+  text-decoration: none;
+}
+
+.attribution a:hover {
+  text-decoration: underline;
+}
+
+.social {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.88);
+  text-decoration: none;
+  background: rgba(255, 47, 214, 0.10);
+  border: 1px solid rgba(255, 47, 214, 0.22);
+  transition: transform 150ms ease, background 150ms ease,
+    border-color 150ms ease;
+}
+
+.social a:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 47, 214, 0.18);
+  border-color: rgba(255, 47, 214, 0.34);
+}
+
+.social a:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+
+.social i {
+  font-size: 18px;
+}
+
+/* Leaflet controls above overlay but below footer/text */
+.leaflet-control-container {
+  z-index: 2;
+}
+
+/* Hide map UI controls (zoom +/- and compass/N if present) */
+.leaflet-control-zoom,
+.leaflet-control-compass,
+.leaflet-control-rotate,
+.leaflet-control-rotation,
+.leaflet-control-rotater,
+.leaflet-control-bearing,
+.leaflet-control-rotate-left,
+.leaflet-control-rotate-right,
+.leaflet-compass,
+.leaflet-rotate-control {
+  display: none !important;
+}
+
+/* Minimal neon center glow (map only, no content change) */
+.centerGlowIcon {
+  background: transparent !important;
+  border: none !important;
+}
+.centerGlow {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255, 47, 214, 0.9), rgba(255, 47, 214, 0.15) 55%, transparent 70%);
+  box-shadow: 0 0 28px rgba(255, 47, 214, 0.35), 0 0 70px rgba(138, 77, 255, 0.22);
+  filter: saturate(1.2);
+}
+
+/* Category markers (futsal / padel / cricket) */
+.catMarkerIcon {
+  background: transparent !important;
+  border: none !important;
+}
+
+.catMarker {
+  position: relative;
+  width: 62px;
+  height: 70px;
+  transform: translateZ(0);
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.55));
+}
+
+.catBubble {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(10, 10, 14, 0.75);
+  border: 1px solid color-mix(in srgb, var(--cat) 40%, rgba(255, 255, 255, 0.14));
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 0 24px color-mix(in srgb, var(--cat) 28%, transparent);
+}
+
+.catBubble i {
+  font-size: 18px;
+  color: var(--cat);
+  text-shadow: 0 0 16px color-mix(in srgb, var(--cat) 45%, transparent);
+}
+
+.catPin {
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 10px;
+  height: 10px;
+  transform: translateX(-50%) rotate(45deg);
+  background: var(--cat);
+  border-radius: 2px;
+  box-shadow: 0 0 18px color-mix(in srgb, var(--cat) 55%, transparent);
+}
+
+@media (max-width: 520px) {
+  .headline {
+    letter-spacing: 0.04em;
+    line-height: 1.18;
+  }
+  .footerInner {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  .social {
+    justify-content: center;
+  }
+}
+
