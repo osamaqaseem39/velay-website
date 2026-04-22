@@ -39,10 +39,11 @@ body {
 }
 
 .app {
-  height: 100vh;
-  height: 100dvh; /* mobile address bar friendly */
+  height: 110vh;
+  height: 110dvh; /* mobile address bar friendly */
   width: 100vw;
   position: relative;
+  overflow: hidden; /* prevent internal scroll */
 }
 
 .map {

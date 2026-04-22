@@ -50,7 +50,14 @@ export default function Page() {
       center: { lat: start.lat, lng: start.lng },
       zoom: start.zoom,
       disableDefaultUI: true,
+      keyboardShortcuts: false,
       clickableIcons: false,
+      zoomControl: false,
+      mapTypeControl: false,
+      scaleControl: false,
+      streetViewControl: false,
+      rotateControl: false,
+      fullscreenControl: false,
       gestureHandling: "greedy",
       backgroundColor: "#0b0b0f",
       styles: [
@@ -147,11 +154,7 @@ export default function Page() {
           </h1>
         </div>
 
-        <footer>
-          <div className="footerInner">
-            <div className="brand">Stay connected</div>
-          </div>
-        </footer>
+        
       </div>
     </>
   );
