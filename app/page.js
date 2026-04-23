@@ -4,7 +4,8 @@ import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
 
 const HEADLINE = "CHAL VELAY TAYAR REH";
-const NEON_PREFIX = "CHAL VELAY ";
+const CHAL_PREFIX = "CHAL ";
+const VELAY_WORD = "VELAY";
 
 const GOOGLE_MAPS_SRC = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}&v=weekly`;
 
@@ -81,7 +82,13 @@ export default function Page() {
       { kind: "padel", name: "Padel Court", dLat: 0.06, dLng: 0.07 },
       { kind: "padel", name: "Padel Club", dLat: -0.065, dLng: -0.04 },
       { kind: "cricket", name: "Cricket Nets", dLat: 0.085, dLng: 0.0 },
-      { kind: "cricket", name: "Cricket Ground", dLat: -0.085, dLng: 0.04 }
+      { kind: "cricket", name: "Cricket Ground", dLat: -0.085, dLng: 0.04 },
+
+      // Extra locations (3-4 more)
+      { kind: "futsal", name: "Futsal Spot", dLat: 0.02, dLng: 0.105 },
+      { kind: "padel", name: "Padel Spot", dLat: -0.02, dLng: -0.11 },
+      { kind: "cricket", name: "Cricket Spot", dLat: 0.115, dLng: -0.02 },
+      { kind: "cricket", name: "Cricket Spot 2", dLat: -0.115, dLng: -0.005 }
     ];
 
     const markers = places.map((p) => {
@@ -139,13 +146,18 @@ export default function Page() {
           <h1 className="headline">
             <span className={typingDone ? "typing typingDone" : "typing"} aria-label={HEADLINE}>
               {(() => {
-                const prefixLen = NEON_PREFIX.length;
-                const typedPrefix = typed.slice(0, prefixLen);
-                const typedRest = typed.slice(prefixLen);
+                const chalLen = CHAL_PREFIX.length;
+                const velayStart = chalLen;
+                const velayEnd = chalLen + VELAY_WORD.length;
+
+                const typedChal = typed.slice(0, chalLen);
+                const typedVelay = typed.slice(velayStart, velayEnd);
+                const typedRest = typed.slice(velayEnd);
 
                 return (
                   <>
-                    <span className="neonPrefix">{typedPrefix}</span>
+                    <span className="chalWord">{typedChal}</span>
+                    <span className="velayWord">{typedVelay}</span>
                     <span className="headlineRest">{typedRest}</span>
                   </>
                 );
